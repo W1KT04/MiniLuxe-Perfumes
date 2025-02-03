@@ -1,0 +1,463 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background: #fafafa;
+    color: #333;
+  }
+  
+  .header {
+    background: linear-gradient(135deg, #000000 0%, #1b1b1b 100%);
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.476);
+    /* Optional: add a subtle glow to the header */
+    animation: glowHeader 3s infinite alternate;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .logo::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30%;
+    height: 3px;
+    background: #fff;
+    transition: width 0.3s ease;
+  }
+  
+  .logo:hover::after {
+    width: 100%;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  
+  .hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+  }
+  
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    background: url('./Images/background.png') center/cover;
+    opacity: 0.9;
+    will-change: transform;
+  }
+  
+  .hero-content {
+    max-width: 600px;
+    animation: slideIn 1s ease;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    z-index: 1;
+    color: #fff;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #ddd;
+  }
+  
+  .cta-btn {
+    padding: 1rem 2rem;
+    background: #ffffff;
+    color: #111;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-weight: 600;
+    border: 2px solid transparent;
+    /* Apply glow effect to the button */
+    animation: glow 2s infinite alternate;
+  }
+  
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.537);
+    transition: left 0.3s ease;
+  }
+  
+  .cta-btn:hover::before {
+    left: 100%;
+  }
+  
+  .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.474);
+  }
+
+  .products {
+    padding: 5rem 5%;
+    background: url('./Images/background.png') center/cover;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .products::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 4rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    justify-items: center; /* Centers each product within its grid cell */
+  }
+  
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+    }
+  }
+  
+  
+  .product-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px 7px rgba(255, 255, 255, 0.75);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #eee;
+    opacity: 0;
+    transform: translateY(50px);
+    /* Set static size */
+    width: 400px;
+    height: 500px;
+    animation: glow 4s infinite alternate;
+  }
+  
+  .product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Add glow effect on hover */
+    animation: glow 1.5s infinite alternate;
+  }
+  
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #fff, #999);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+    filter: grayscale(100%);
+  }
+  
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+  
+  .product-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #000000;
+  }
+  
+  .product-desc {
+    color: #000000;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    /* Ensure the description does not overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  
+  .product-price {
+    color: #000000;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .thumbnail-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .thumbnail {
+    width: 50px;
+    height: auto;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  
+  .thumbnail:hover {
+    border-color: #000;
+    animation: glow 2s infinite alternate;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+  
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    /* For smaller viewports, allow the grid to adjust */
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(500px, 2fr));
+    }
+  }
+  
+  .parallax-layer {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  /* New Glow Animation */
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  /* Optional: Glow effect for header */
+  @keyframes glowHeader {
+    0% {
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  /* Footer Styles */
+  .footer {
+    background: #0b0b0b;
+    color: #ffffff;
+    padding: 2rem 2%;
+    text-align: center;
+  }
+  
+  .footer-content p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .footer .social-links {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    gap: 1rem;
+    margin: 0;
+  }
+  
+  .footer .social-links li a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
+  }
+  
+  .footer .social-links li a:hover {
+    color: #ddd;
+  }
+
+  .sample-selector {
+    position: absolute;
+    bottom: 58px; /* Adjust this value so it sits nicely above the Add to Cart button */
+    left: 297px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Optional: add a background or padding if needed for better readability */
+  }
+
+  
+  /* Style for the select element */
+  .sample-selector select {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  .sample-selector select:focus {
+    outline: none;
+    border-color: #888;
+  }
+
+
+  /* Add-to-Cart Button remains positioned at bottom right */
+  .add-to-cart {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #494949, #8f8f8f);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: 400;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  }
+
+  .add-to-cart:hover {
+    background: linear-gradient(135deg, #5c5c5c, #8e8e8e);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.5);
+    animation: glow 1.5s infinite alternate;
+  }
+
+  /* Subtle shine effect on Add-to-Cart */
+  .add-to-cart::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.4s ease-in-out;
+  }
+
+  .add-to-cart:hover::before {
+    left: 100%;
+  }
+
+  .add-to-cart:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
+  }
+
+  
+  
